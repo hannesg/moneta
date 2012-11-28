@@ -25,6 +25,7 @@ gem 'sequel'
 gem 'dalli'
 gem 'riak-client'
 gem 'hashery'
+gem 'rugged', :git => 'git://github.com/libgit2/rugged.git', :branch => 'development'
 
 if defined?(JRUBY_VERSION)
   gem 'jdbc-sqlite3'

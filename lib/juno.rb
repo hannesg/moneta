@@ -27,6 +27,7 @@ module Juno
     autoload :PStore,          'juno/adapters/pstore'
     autoload :Redis,           'juno/adapters/redis'
     autoload :Riak,            'juno/adapters/riak'
+    autoload :Rugged,          'juno/adapters/rugged'
     autoload :SDBM,            'juno/adapters/sdbm'
     autoload :Sequel,          'juno/adapters/sequel'
     autoload :Sqlite,          'juno/adapters/sqlite'
