@@ -25,6 +25,7 @@ gem 'sequel'
 gem 'dalli'
 gem 'riak-client'
 gem 'hashery'
+gem 'cassandra'
 
 if defined?(JRUBY_VERSION)
   gem 'jdbc-sqlite3'
@@ -37,5 +38,4 @@ else
   gem 'sqlite3'
 end
 
-#gem 'cassandra'
 #gem 'localmemcache'
