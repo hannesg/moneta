@@ -17188,6 +17188,41 @@ shared_examples_for 'increment' do
   end
 end
 
+#################### create ####################
+
+shared_examples_for 'create' do
+  it 'creates the given key' do
+    expect( store.create('key','value') ).to be_true
+    expect( store['key'] ).to be_eql('value')
+  end
+
+  it 'does not create a key if it exists' do
+    store['key'] = 'value'
+    expect( store.create('key','another value') ).to be_false
+    expect( store['key'] ).to be_eql('value')
+  end
+
+end
+
+#################### create_expires ####################
+
+shared_examples_for 'create_expires' do
+  it 'creates the given key and expires it' do
+    expect( store.create('key','value', :expires => 1) ).to be_true
+    expect( store['key'] ).to be_eql('value')
+    sleep 2
+    expect( store.key? 'key' ).to be_false
+  end
+
+  it 'does not change expires if the key exists' do
+    store['key'] = 'value'
+    expect( store.create('key','another value', :expires => 1) ).to be_false
+    expect( store['key'] ).to be_eql('value')
+    sleep 2
+    expect( store.key? 'key' ).to be_true
+  end
+end
+
 #################### marshallable_key ####################
 
 shared_examples_for 'marshallable_key' do

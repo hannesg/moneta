@@ -98,6 +98,15 @@ class Specs
   def with_default_expires
     new(:specs => specs.with(:default_expires))
   end
+
+  def with_create
+    new(:specs => specs.with(:create))
+  end
+
+  def with_create_expires
+    new(:specs => specs.with(:create, :create_expires))
+  end
+
 end
 
 ADAPTER_SPECS = Specs.new(:specs => [:null, :store, :returndifferent, :increment, :persist, :multiprocess], :key => %w(string), :value => %w(string))
@@ -343,7 +352,7 @@ end
   },
   'simple_redis' => {
     :store => :Redis,
-    :specs => STANDARD_SPECS.with_native_expires,
+    :specs => STANDARD_SPECS.with_native_expires.with_create_expires,
   },
   'simple_memcached' => {
     :store => :Memcached,
@@ -1222,7 +1231,7 @@ end}
   },
   'adapter_redis' => {
     :build => 'Moneta::Adapters::Redis.new',
-    :specs => ADAPTER_SPECS.with_native_expires
+    :specs => ADAPTER_SPECS.with_native_expires.with_create_expires
   },
   'adapter_redis_with_default_expires' => {
     :build => %{Moneta::Adapters::Redis.new(:expires => 1)},
@@ -1809,6 +1818,33 @@ it 'raises error in #decrement on non integer value' do
   expect do
     store.decrement('strkey')
   end.to raise_error
+end}
+
+SPECS['create'] = %{it 'creates the given key' do
+  expect( store.create('key','value') ).to be_true
+  expect( store['key'] ).to be_eql('value')
+end
+
+it 'does not create a key if it exists' do
+  store['key'] = 'value'
+  expect( store.create('key','another value') ).to be_false
+  expect( store['key'] ).to be_eql('value')
+end
+}
+
+SPECS['create_expires'] = %{it 'creates the given key and expires it' do
+  expect( store.create('key','value', :expires => 1) ).to be_true
+  expect( store['key'] ).to be_eql('value')
+  sleep 2
+  expect( store.key? 'key' ).to be_false
+end
+
+it 'does not change expires if the key exists' do
+  store['key'] = 'value'
+  expect( store.create('key','another value', :expires => 1) ).to be_false
+  expect( store['key'] ).to be_eql('value')
+  sleep 2
+  expect( store.key? 'key' ).to be_true
 end}
 
 SPECS['marshallable_key']  = %{it 'refuses to #[] from keys that cannot be marshalled' do

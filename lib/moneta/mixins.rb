@@ -149,6 +149,20 @@ module Moneta
     def []=(key, value)
       store(key, value)
     end
+
+
+    # Atomically sets a key to value if it's not set.
+    #
+    # @note Not every Moneta store implements this method,
+    #       a NotImplementedError is raised if it is not supported.
+    # @param [Object] key
+    # @param [Object] value
+    # @param [Hash] options
+    # @return [Boolean] key was set
+    # @api public
+    def create(key, value)
+      raise NotImplementedError, 'create is not supported'
+    end
   end
 
   # @api private

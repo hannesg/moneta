@@ -78,5 +78,10 @@ module Moneta
       adapter.clear(options)
       self
     end
+
+    # (see Defaults#create)
+    def create(key, value, options = {})
+      adapter.create(key, value, options)
+    end
   end
 end
