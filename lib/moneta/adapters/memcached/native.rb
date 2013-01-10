@@ -66,6 +66,16 @@ module Moneta
         amount
       end
 
+      # (see Defaults#create)
+      def create(key, value, options = {})
+        begin
+          @cache.add(key, value, expires_value(options) || 0, false)
+          true
+        rescue ::Memcached::ConnectionDataExists
+          return false
+        end
+      end
+
       # (see Proxy#clear)
       def clear(options = {})
         @cache.flush

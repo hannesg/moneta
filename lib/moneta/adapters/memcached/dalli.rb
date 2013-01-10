@@ -65,6 +65,11 @@ module Moneta
         self
       end
 
+      # (see Defaults#create)
+      def create(key, value, options = {})
+        @cache.add(key, value, expires_value(options) || nil, :raw => true)
+      end
+
       # (see Proxy#close)
       def close
         @cache.close

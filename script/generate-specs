@@ -1166,7 +1166,7 @@ end
   },
   'adapter_memcached_dalli' => {
     :build => 'Moneta::Adapters::MemcachedDalli.new(:namespace => "adapter_memcached_dalli")',
-    :specs => ADAPTER_SPECS.with_native_expires
+    :specs => ADAPTER_SPECS.with_native_expires.with_create_expires
   },
   'adapter_memcached_dalli_with_default_expires' => {
     :build => %{Moneta::Adapters::MemcachedDalli.new(:expires => 1)},
@@ -1174,7 +1174,7 @@ end
   },
   'adapter_memcached_native' => {
     :build => 'Moneta::Adapters::MemcachedNative.new(:namespace => "adapter_memcached_native")',
-    :specs => ADAPTER_SPECS.with_native_expires
+    :specs => ADAPTER_SPECS.with_native_expires.with_create_expires
   },
   'adapter_memcached_native_with_default_expires' => {
     :build => %{Moneta::Adapters::MemcachedNative.new(:expires => 1)},
