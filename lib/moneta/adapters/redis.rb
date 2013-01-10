@@ -71,9 +71,9 @@ module Moneta
       def create(key, value, options = {})
         if @redis.setnx(key, value)
           update_expires(key, options)
-          return true
+          true
         else
-          return false
+          false
         end
       end
 
