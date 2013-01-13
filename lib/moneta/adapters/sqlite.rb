@@ -68,7 +68,7 @@ module Moneta
         # If you know a better way to detect whether an insert-ignore 
         # suceeded, please tell me.
         @create.reset!
-        return false
+        false
       end
 
       # (see Proxy#close)

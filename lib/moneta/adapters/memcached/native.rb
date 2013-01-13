@@ -72,7 +72,7 @@ module Moneta
           @cache.add(key, value, expires_value(options) || 0, false)
           true
         rescue ::Memcached::ConnectionDataExists
-          return false
+          false
         end
       end
 
