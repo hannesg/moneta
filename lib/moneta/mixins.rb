@@ -160,7 +160,7 @@ module Moneta
     # @param [Hash] options
     # @return [Boolean] key was set
     # @api public
-    def create(key, value)
+    def create(key, value, options = {})
       raise NotImplementedError, 'create is not supported'
     end
   end
