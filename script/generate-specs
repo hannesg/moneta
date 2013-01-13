@@ -1258,7 +1258,7 @@ end}
   },
   'adapter_sqlite' => {
     :build => 'Moneta::Adapters::Sqlite.new(:file => File.join(make_tempdir, "adapter_sqlite"))',
-    :specs => ADAPTER_SPECS
+    :specs => ADAPTER_SPECS.with_create
   },
   'adapter_tokyocabinet_bdb' => {
     :build => 'Moneta::Adapters::TokyoCabinet.new(:file => File.join(make_tempdir, "adapter_tokyocabinet_bdb"), :type => :bdb)',
