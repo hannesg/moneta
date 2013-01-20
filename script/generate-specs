@@ -1262,11 +1262,11 @@ end}
   },
   'adapter_tokyocabinet_bdb' => {
     :build => 'Moneta::Adapters::TokyoCabinet.new(:file => File.join(make_tempdir, "adapter_tokyocabinet_bdb"), :type => :bdb)',
-    :specs => ADAPTER_SPECS.without_multiprocess
+    :specs => ADAPTER_SPECS.without_multiprocess.with_create
   },
   'adapter_tokyocabinet_hdb' => {
     :build => 'Moneta::Adapters::TokyoCabinet.new(:file => File.join(make_tempdir, "adapter_tokyocabinet_hdb"), :type => :hdb)',
-    :specs => ADAPTER_SPECS.without_multiprocess
+    :specs => ADAPTER_SPECS.without_multiprocess.with_create
   },
   'adapter_yaml' => {
     :build => 'Moneta::Adapters::YAML.new(:file => File.join(make_tempdir, "adapter_yaml"))',

@@ -29,6 +29,10 @@ module Moneta
         end
       end
 
+      def create(key, value, options = {})
+        @hash.putkeep(key, value)
+      end
+
       # (see Proxy#close)
       def close
         @hash.close
