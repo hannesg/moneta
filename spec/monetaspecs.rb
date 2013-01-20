@@ -17215,7 +17215,7 @@ shared_examples_for 'create_expires' do
   end
 
   it 'does not change expires if the key exists' do
-    store['key'] = 'value'
+    store.store('key', 'value', :expires => false)
     expect( store.create('key','another value', :expires => 1) ).to be_false
     expect( store['key'] ).to be_eql('value')
     sleep 2

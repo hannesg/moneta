@@ -29,10 +29,12 @@ module Rack
 
       def get_session(env, sid)
         with_lock(env) do
-          unless sid && session = @pool[sid]
-            sid, session = generate_sid, {}
-            @pool[sid] = session
+          if session = @pool[sid]
+            return [sid, session]
           end
+          begin
+            sid, session = generate_sid, {}
+          end while !@pool.create(sid, session)
           [sid, session]
         end
       end

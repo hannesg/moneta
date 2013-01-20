@@ -19,6 +19,8 @@ describe_moneta "expires_file" do
   end
 
   include_context 'setup_store'
+  it_should_behave_like 'create'
+  it_should_behave_like 'create_expires'
   it_should_behave_like 'expires'
   it_should_behave_like 'increment'
   it_should_behave_like 'marshallable_key'
